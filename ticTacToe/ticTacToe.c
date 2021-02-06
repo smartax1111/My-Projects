@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <math.h>
+#include <stdlib.h>
 
 //        l       l
 //    0   l   1   l   2
@@ -39,18 +39,7 @@ int bestMove();
 
 
 
-int board(){
-    if(newGame = true){
-        int c;
-        for( c = 1; c > 9; c = c + 1){
-            space[c] = 'p';
-        }  
-        return* space;
-    }
-    else{
-        return* space;
-    }
-}
+
 
 bool win(){
     if(space[0] == 'x' && space[1] == 'x' && space[2] == 'x'){
@@ -117,9 +106,21 @@ bool win(){
 }
 
 int player1(int p1){
+    bool sequence = false;
     printf("\n\n");
-
-    space[p1] = 'x';
+    while(sequence == false){
+        if (space[p1] =='o' || space[p1] == 'x'){
+            p1 = rand() % 9;
+            
+        }
+        else{
+            space[p1] = 'x';
+            sequence = true;
+        }
+    }
+    if(sequence = true){
+        space[p1] = 'x';
+    }
     win();//to refer back to the win function to see if win conditions are met
     if(winner == true){
         printf("Player 1 wins\n\n");
@@ -179,6 +180,7 @@ bool playAgain(){
         if(Answer[1] == answerNo[1]){
             printf("See you later then\n");
             gameOver = true;
+            exit(0);
         }
 
         if(Answer[2] == answerYes[2]){
@@ -200,7 +202,7 @@ int main(){
     //For playing again [See Line XXX]
     while(gameOver == false){
         while(winner == false && draw == false){
-	        board();//shows the board before gameplay
+
             printf("       l       l       \n   %c   l   %c   l   %c   \n       l       l       \n***********************\n       l       l       \n   %c   l   %c   l   %c   \n       l       l       \n***********************\n       l       l       \n   %c   l   %c   l   %c   \n       l       l       \n\n",space[0], space[1], space[2], space[3], space[4], space[5], space[6], space[7], space[8]); 
 
             while(currentPlayer == 1 && winner == false && draw == false){//to keep the loop going if they make a wrong move
@@ -210,7 +212,7 @@ int main(){
 
                 
             }
-            board();//Show board again for Player 2
+
             printf("       l       l       \n   %c   l   %c   l   %c   \n       l       l       \n***********************\n       l       l       \n   %c   l   %c   l   %c   \n       l       l       \n***********************\n       l       l       \n   %c   l   %c   l   %c   \n       l       l       \n\n",space[0], space[1], space[2], space[3], space[4], space[5], space[6], space[7], space[8]); 
 
             while(currentPlayer == 2 && winner == false && draw == false){//to keep the loop going if they make a wrong move
@@ -222,9 +224,11 @@ int main(){
         playAgain(0);
         winner = false;
         currentPlayer = 1;
-        space[9]='p','p','p','p','p','p','p','p','p';
+        for(int i = 0; i < 9; i++){
+            space[i] = 'p';
+        }
+        
     }
     return(0);
-}	   
-               
+}
 
